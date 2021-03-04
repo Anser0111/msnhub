@@ -10,14 +10,14 @@
 import NavBar from "components/common/navbar/NavBar.vue";
 import HomeSwiper from "./childComps/HomeSwiper.vue";
 
-import { getMSN, getHomeGoods } from "network/home.js";
+import { getMSN } from "network/home.js";
 import GoodsList from "components/content/goods/GoodsList.vue";
 
 export default {
   data() {
     return {
       goods: {
-        pop: { page: 0, list: [] },
+        list: { list: [] },
       },
       banners: [
         {
@@ -41,8 +41,6 @@ export default {
   },
   created() {
     this.getMSN();
-
-    this.getHomeGoods("pop");
   },
 
   components: {
@@ -52,20 +50,14 @@ export default {
   },
   computed: {
     showGoods() {
-      return this.goods["pop"].list;
+      return this.goods["list"].list;
     },
   },
   methods: {
     getMSN() {
       getMSN().then((res) => {
-        console.log(res);
-      });
-    },
-    getHomeGoods(type) {
-      let page = 1;
-      getHomeGoods(type, page).then((res) => {
-        console.log(res);
-        this.goods[type].list.push(...res.data.data.list);
+        console.log(res.data);
+        this.goods["list"].list.push(res.data);
       });
     },
   },

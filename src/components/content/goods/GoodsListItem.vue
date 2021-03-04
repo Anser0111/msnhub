@@ -17,7 +17,7 @@ export default {
   computed: {
     showImage() {
       //这里使用逻辑或，如果前面为false，则执行后面的
-      return this.goodsItem.image || this.goodsItem.show.img;
+      return this.goodsItem.url;
     },
   },
   methods: {},
